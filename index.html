@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yiying Chen — Financial & Industry Analysis Portfolio</title>
+<style>
+  :root {
+    --blue-50: #E6F1FB; --blue-100: #B5D4F4; --blue-200: #85B7EB;
+    --blue-400: #378ADD; --blue-600: #185FA5; --blue-800: #0C447C; --blue-900: #042C53;
+    --teal-50: #E1F5EE; --teal-100: #9FE1CB; --teal-400: #1D9E75; --teal-600: #0F6E56; --teal-800: #085041;
+    --gray-50: #F1EFE8; --gray-100: #D3D1C7; --gray-200: #B4B2A9; --gray-400: #888780;
+    --gray-600: #5F5E5A; --gray-800: #444441; --gray-900: #2C2C2A;
+    --amber-50: #FAEEDA; --amber-100: #FAC775; --amber-400: #BA7517; --amber-800: #633806;
+    --purple-50: #EEEDFE; --purple-400: #7F77DD; --purple-600: #534AB7; --purple-800: #3C3489;
+    --coral-50: #FAECE7; --coral-400: #D85A30; --coral-600: #993C1D; --coral-800: #712B13;
+    --text: #1a1a1a; --text-muted: #5a5a5a; --text-light: #888;
+    --border: #e2e2e2; --bg: #ffffff; --bg-soft: #f8f7f5; --bg-card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; color: var(--text); background: var(--bg-soft); line-height: 1.7; font-size: 15px; }
+  a { color: var(--blue-600); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96); border-bottom: 1px solid var(--border);
+    padding: 0 2rem; display: flex; align-items: center; gap: 2rem; height: 52px;
+    backdrop-filter: blur(8px);
+  }
+  .nav-brand { font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--blue-800); white-space: nowrap; font-family: sans-serif; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+  .nav-links a { font-size: 12px; font-family: sans-serif; color: var(--text-muted); letter-spacing: .03em; text-transform: uppercase; transition: color .2s; }
+  .nav-links a:hover { color: var(--blue-600); text-decoration: none; }
+
+  /* HERO */
+  .hero {
+    background: var(--blue-900);
+    color: #fff;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+  .hero-tag {
+    display: inline-block; font-family: sans-serif; font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--blue-200); border: 1px solid var(--blue-600);
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 1.5rem;
+  }
+  .hero h1 { font-size: 2.8rem; font-weight: normal; letter-spacing: -.01em; margin-bottom: .5rem; line-height: 1.2; }
+  .hero-sub { font-size: 1rem; color: var(--blue-200); margin-bottom: 2rem; font-family: sans-serif; }
+  .hero-meta { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+  .hero-meta-item { text-align: center; }
+  .hero-meta-item .label { font-family: sans-serif; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--blue-200); }
+  .hero-meta-item .value { font-family: sans-serif; font-size: 14px; color: #fff; margin-top: 2px; }
+
+  /* LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+  section { padding: 4rem 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  /* SECTION HEADER */
+  .section-num { font-family: sans-serif; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--blue-400); margin-bottom: .4rem; }
+  .section-title { font-size: 1.7rem; font-weight: normal; color: var(--gray-900); margin-bottom: .5rem; }
+  .section-desc { font-size: .95rem; color: var(--text-muted); max-width: 620px; font-family: sans-serif; line-height: 1.6; }
+
+  /* PROJECT HEADER */
+  .project-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 2rem; }
+  .project-num-badge {
+    flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+    background: var(--blue-50); border: 1px solid var(--blue-100);
+    display: flex; align-items: center; justify-content: center;
+    font-family: sans-serif; font-size: 14px; font-weight: 600; color: var(--blue-800);
+  }
+  .project-title { font-size: 1.35rem; font-weight: normal; color: var(--gray-900); line-height: 1.3; }
+  .project-subtitle { font-family: sans-serif; font-size: 12px; color: var(--text-muted); margin-top: 3px; letter-spacing: .02em; }
+
+  /* CARDS */
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem;
+  }
+  .card + .card { margin-top: 1rem; }
+  .card-label { font-family: sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: .09em; color: var(--text-light); margin-bottom: .6rem; }
+  .card h3 { font-size: 1rem; font-weight: normal; color: var(--gray-900); margin-bottom: .6rem; }
+
+  /* METRIC GRID */
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 1.5rem 0; }
+  .metric {
+    background: var(--bg-soft); border: 1px solid var(--border); border-radius: 8px;
+    padding: .9rem 1rem; text-align: center;
+  }
+  .metric-value { font-family: sans-serif; font-size: 1.4rem; font-weight: 600; color: var(--blue-800); }
+  .metric-label { font-family: sans-serif; font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.3; }
+  .metric-note { font-family: sans-serif; font-size: 10px; color: var(--text-light); margin-top: 2px; }
+
+  /* DATA TABLE */
+  .data-table-wrap { overflow-x: auto; margin: 1.2rem 0; border: 1px solid var(--border); border-radius: 8px; }
+  table { width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 12.5px; }
+  thead tr { background: var(--blue-900); color: #fff; }
+  thead th { padding: 9px 14px; text-align: left; font-weight: 500; letter-spacing: .03em; white-space: nowrap; }
+  tbody tr:nth-child(even) { background: var(--bg-soft); }
+  tbody tr:hover { background: var(--blue-50); }
+  td { padding: 8px 14px; color: var(--text); border-bottom: 1px solid var(--border); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.neg { color: var(--coral-600); }
+  td.pos { color: var(--teal-600); }
+  td.highlight { font-weight: 600; color: var(--blue-800); }
+
+  /* RISK CHIPS */
+  .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 1.2rem 0; }
+  .risk-item {
+    border-radius: 8px; padding: .9rem 1.1rem;
+    border-left: 3px solid;
+  }
+  .risk-item.red { background: #FCEBEB; border-color: #E24B4A; }
+  .risk-item.amber { background: var(--amber-50); border-color: var(--amber-400); }
+  .risk-item.blue { background: var(--blue-50); border-color: var(--blue-400); }
+  .risk-item .risk-title { font-family: sans-serif; font-size: 12px; font-weight: 600; color: var(--gray-900); }
+  .risk-item .risk-desc { font-family: sans-serif; font-size: 11.5px; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+
+  /* METHODOLOGY BOX */
+  .method-box {
+    background: var(--blue-50); border: 1px solid var(--blue-100);
+    border-radius: 8px; padding: 1.1rem 1.3rem; margin: 1.2rem 0;
+  }
+  .method-box .method-label { font-family: sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--blue-600); margin-bottom: .5rem; }
+  .method-steps { display: flex; flex-wrap: wrap; gap: 8px; }
+  .method-step {
+    background: #fff; border: 1px solid var(--blue-200); border-radius: 20px;
+    font-family: sans-serif; font-size: 12px; color: var(--blue-800);
+    padding: 4px 14px;
+  }
+
+  /* AHP DIAGRAM */
+  .ahp-tree { margin: 1.5rem 0; }
+  .ahp-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 6px; position: relative; }
+  .ahp-node {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 12px;
+    font-family: sans-serif; font-size: 11px; text-align: center; color: var(--gray-900);
+    min-width: 80px;
+  }
+  .ahp-node.target { background: var(--blue-900); color: #fff; border-color: var(--blue-900); font-size: 12px; font-weight: 500; }
+  .ahp-node.criterion { background: var(--blue-50); border-color: var(--blue-200); color: var(--blue-800); }
+  .ahp-node.sub { background: var(--gray-50); border-color: var(--gray-200); color: var(--gray-800); font-size: 10.5px; }
+  .ahp-connector { text-align: center; color: var(--border); font-size: 18px; line-height: 1; margin: 0 0 4px; font-family: sans-serif; }
+  .weight-badge {
+    display: inline-block; font-family: sans-serif; font-size: 10px;
+    background: var(--teal-50); border: 1px solid var(--teal-100);
+    color: var(--teal-600); padding: 2px 8px; border-radius: 10px; margin-left: 6px;
+  }
+
+  /* CONTRIBUTION LIST */
+  .contrib-list { list-style: none; margin: 1rem 0; }
+  .contrib-list li {
+    font-family: sans-serif; font-size: 13.5px; color: var(--text);
+    padding: 7px 0 7px 1.2rem; border-bottom: 1px solid var(--border);
+    position: relative; line-height: 1.5;
+  }
+  .contrib-list li:before { content: "→"; position: absolute; left: 0; color: var(--blue-400); font-size: 12px; top: 9px; }
+  .contrib-list li:last-child { border-bottom: none; }
+
+  /* PUBLICATION CARD */
+  .pub-card {
+    background: var(--teal-50); border: 1px solid var(--teal-100);
+    border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0;
+    display: flex; gap: 1.2rem; align-items: flex-start;
+  }
+  .pub-icon { font-size: 2rem; flex-shrink: 0; }
+  .pub-journal { font-family: sans-serif; font-size: 11px; color: var(--teal-600); font-style: italic; margin-bottom: .3rem; }
+  .pub-title { font-size: 1rem; color: var(--teal-800); margin-bottom: .4rem; }
+  .pub-detail { font-family: sans-serif; font-size: 12px; color: var(--text-muted); }
+
+  /* SKILLS SUMMARY */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 1.5rem; }
+  .skill-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.1rem;
+  }
+  .skill-icon { font-size: 1.3rem; margin-bottom: .5rem; }
+  .skill-name { font-family: sans-serif; font-size: 13px; font-weight: 600; color: var(--gray-900); margin-bottom: .3rem; }
+  .skill-desc { font-family: sans-serif; font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); margin: 2rem 0; }
+
+  /* PROSE */
+  .prose { font-size: .95rem; color: var(--text); line-height: 1.8; }
+  .prose p { margin-bottom: 1rem; }
+  .prose strong { color: var(--gray-900); font-weight: 600; }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } .hero h1 { font-size: 2rem; } }
+
+  /* QUOTE */
+  blockquote {
+    border-left: 3px solid var(--blue-400); margin: 1.2rem 0;
+    padding: .6rem 1.2rem; font-style: italic;
+    color: var(--text-muted); font-size: .93rem; background: var(--blue-50); border-radius: 0 6px 6px 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--gray-900); color: var(--gray-200);
+    text-align: center; padding: 2.5rem 1rem;
+    font-family: sans-serif; font-size: 12px;
+  }
+  footer a { color: var(--blue-200); }
+
+  /* PRINT */
+  @media print {
+    nav { display: none; }
+    .hero { padding: 2rem; }
+    section { break-inside: avoid; }
+  }
+
+  /* BAR CHART */
+  .bar-row { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+  .bar-label { font-family: sans-serif; font-size: 11.5px; color: var(--text-muted); width: 130px; flex-shrink: 0; text-align: right; }
+  .bar-track { flex: 1; height: 18px; background: var(--bg-soft); border-radius: 3px; overflow: hidden; border: 1px solid var(--border); }
+  .bar-fill { height: 100%; border-radius: 2px; display: flex; align-items: center; padding-left: 6px; transition: width 1s ease; }
+  .bar-fill span { font-family: sans-serif; font-size: 10px; font-weight: 600; color: #fff; white-space: nowrap; }
+
+  .tag { display: inline-block; font-family: sans-serif; font-size: 11px; padding: 3px 10px; border-radius: 12px; margin: 3px; }
+  .tag-blue { background: var(--blue-50); color: var(--blue-800); border: 1px solid var(--blue-100); }
+  .tag-teal { background: var(--teal-50); color: var(--teal-600); border: 1px solid var(--teal-100); }
+  .tag-amber { background: var(--amber-50); color: var(--amber-800); border: 1px solid var(--amber-100); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">YIYING CHEN</div>
+  <ul class="nav-links">
+    <li><a href="#about">Profile</a></li>
+    <li><a href="#p1">Bilibili</a></li>
+    <li><a href="#p2">AHP Model</a></li>
+    <li><a href="#p3">Macao</a></li>
+    <li><a href="#p4">Publication</a></li>
+    <li><a href="#p5">Quantitative</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Economics, Finance &amp; Data Analysis Portfolio</div>
+  <h1>Yiying Chen</h1>
+  <div class="hero-sub">MSc Health Economics &amp; Decision Science, UCL &nbsp;·&nbsp; BEcon International Economics &amp; Trade, Chongqing University</div>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="label">Location</div>
+      <div class="value">London, UK</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="label">Contact</div>
+      <div class="value">xiaoman6302@gmail.com</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="label">Languages</div>
+      <div class="value">Mandarin (native) · English (IELTS 7.0)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about">
+<div class="container">
+<section>
+  <div class="section-num">Portfolio Positioning</div>
+  <div class="section-title">Translating data into credit-oriented insight</div>
+  <div class="section-desc">Selected analytical work demonstrating core quantitative and analytical capabilities: financial modelling, industry research, data analysis, structured risk assessment, and report writing — aligned with economics and finance analytical roles.</div>
+
+  <div class="divider"></div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">Academic Foundation</div>
+      <div class="prose" style="font-size:.88rem;">
+        <p>BEcon International Economics &amp; Trade, Chongqing University (985 / Double First-Class) — GPA 3.67/4.00, Top 10%.</p>
+        <p>High-scoring core modules:
+          <span class="tag tag-blue">Corporate Finance 98</span>
+          <span class="tag tag-blue">Financial Accounting 98</span>
+          <span class="tag tag-blue">Microeconomics 98</span>
+          <span class="tag tag-blue">Finance 95</span>
+          <span class="tag tag-blue">Econometrics 90</span>
+          <span class="tag tag-blue">Statistics 90</span>
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Analytical Capabilities</div>
+      <div class="prose" style="font-size:.88rem;">
+        <p>Hands-on experience across the full analytical cycle: financial statement analysis, ratio computation, DCF/WACC modelling, AHP/entropy-weight quantitative frameworks, sensitivity analysis, industry benchmarking, and structured report writing.</p>
+        <p>Tools: Excel (financial modelling) · Python · Stata · MATLAB · R</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</div>
+
+<!-- PROJECT 1 -->
+<div id="p1">
+<div class="container">
+<section>
+  <div class="section-num">Project 01</div>
+  <div class="project-header">
+    <div class="project-num-badge">1</div>
+    <div>
+      <div class="project-title">Bilibili Inc. — Financial Analysis &amp; Credit Risk Assessment</div>
+      <div class="project-subtitle">Company Valuation Report · Corporate Finance Course · Chongqing University · 2022–2023</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>This project analysed Bilibili (NASDAQ: BILI; HKEX: 9626) from the perspectives of financial performance, industry competition, and business model sustainability. While the original focus was company valuation, the analysis has been reframed here through a credit-risk lens — examining revenue quality, profitability pressure, cash flow stability, and risk factors relevant to financial flexibility.</p>
+  </div>
+
+  <div class="method-box">
+    <div class="method-label">Analytical Framework</div>
+    <div class="method-steps">
+      <div class="method-step">PEST / Porter's Five Forces</div>
+      <div class="method-step">SWOT</div>
+      <div class="method-step">3-statement analysis</div>
+      <div class="method-step">DuPont decomposition</div>
+      <div class="method-step">Ratio analysis</div>
+      <div class="method-step">DCF / WACC</div>
+      <div class="method-step">EVA</div>
+      <div class="method-step">P/E comparables</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.6rem;">Financial Summary — Income Statement (RMB '000)</div>
+  <div class="data-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th style="text-align:right;">FY 2020</th>
+          <th style="text-align:right;">FY 2021</th>
+          <th style="text-align:right;">FY 2022</th>
+          <th style="text-align:right;">YoY Chg</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Net revenues</td><td class="num">11,998,976</td><td class="num">19,383,684</td><td class="num">21,899,167</td><td class="num pos">+13.0%</td></tr>
+        <tr><td>— Mobile gaming</td><td class="num">—</td><td class="num">5,090,926</td><td class="num">5,021,290</td><td class="num neg">−1.4%</td></tr>
+        <tr><td>— Value-added services</td><td class="num">—</td><td class="num">6,934,886</td><td class="num">8,715,170</td><td class="num pos">+25.7%</td></tr>
+        <tr><td>— Advertising</td><td class="num">—</td><td class="num">4,523,421</td><td class="num">5,066,212</td><td class="num pos">+12.0%</td></tr>
+        <tr><td>Gross profit</td><td class="num">2,840,176</td><td class="num">4,043,147</td><td class="num">3,849,295</td><td class="num neg">−4.8%</td></tr>
+        <tr><td>Total operating expenses</td><td class="num neg">(5,981,139)</td><td class="num neg">(10,472,221)</td><td class="num neg">(12,207,239)</td><td class="num neg">+16.6%</td></tr>
+        <tr><td>Net loss</td><td class="num neg">(3,054,017)</td><td class="num neg">(6,808,739)</td><td class="num neg">(7,507,653)</td><td class="num neg">+10.3%</td></tr>
+        <tr><td class="highlight">Adjusted net loss (non-GAAP)</td><td class="num">—</td><td class="num neg">(5,497,573)</td><td class="num neg">(6,702,373)</td><td class="num neg">+21.9%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-label" style="margin:.9rem 0 .6rem;">Balance Sheet Highlights</div>
+  <div class="data-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Item</th><th style="text-align:right;">FY 2021</th><th style="text-align:right;">FY 2022</th><th style="text-align:right;">Change</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Total current assets</td><td class="num">36,446,856</td><td class="num">24,452,888</td><td class="num neg">−32.9%</td></tr>
+        <tr><td>Total assets</td><td class="num">52,053,151</td><td class="num">41,830,570</td><td class="num neg">−19.6%</td></tr>
+        <tr><td>Total liabilities</td><td class="num">30,337,085</td><td class="num">26,590,983</td><td class="num pos">−12.4%</td></tr>
+        <tr><td>Total equity</td><td class="num">21,716,066</td><td class="num">15,239,587</td><td class="num neg">−29.8%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.8rem;">Ratio Analysis</div>
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-value">1.43×</div>
+      <div class="metric-label">Current ratio 2022</div>
+      <div class="metric-note">vs 3.02× in 2021</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">1.31×</div>
+      <div class="metric-label">Quick ratio 2022</div>
+      <div class="metric-note">vs 2.78× in 2021</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">−41%</div>
+      <div class="metric-label">ROE (2022)</div>
+      <div class="metric-note">Net loss / avg equity</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">5.67%</div>
+      <div class="metric-label">WACC</div>
+      <div class="metric-note">Ke=7.03%, Kd=1.06%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">−¥76bn</div>
+      <div class="metric-label">EVA (2022)</div>
+      <div class="metric-note">Economic value destroyed</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">64%</div>
+      <div class="metric-label">Debt ratio 2022</div>
+      <div class="metric-note">vs 58% in 2021</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.8rem;">DuPont Decomposition — ROE Bridge</div>
+  <div class="card">
+    <div style="display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; font-family:sans-serif; font-size:13px;">
+      <div style="text-align:center; padding:.5rem .8rem; background:var(--blue-50); border:1px solid var(--blue-100); border-radius:6px;">
+        <div style="font-size:10px;color:var(--text-muted);">ROE</div>
+        <div style="font-size:1.1rem;font-weight:600;color:var(--coral-600);">−40.6%</div>
+      </div>
+      <div style="color:var(--text-muted);">=</div>
+      <div style="text-align:center; padding:.5rem .8rem; background:var(--bg-soft); border:1px solid var(--border); border-radius:6px;">
+        <div style="font-size:10px;color:var(--text-muted);">Net profit margin</div>
+        <div style="font-size:1.1rem;font-weight:600;color:var(--coral-600);">−34.3%</div>
+      </div>
+      <div style="color:var(--text-muted);">×</div>
+      <div style="text-align:center; padding:.5rem .8rem; background:var(--bg-soft); border:1px solid var(--border); border-radius:6px;">
+        <div style="font-size:10px;color:var(--text-muted);">Asset turnover</div>
+        <div style="font-size:1.1rem;font-weight:600;color:var(--gray-800);">0.47×</div>
+      </div>
+      <div style="color:var(--text-muted);">×</div>
+      <div style="text-align:center; padding:.5rem .8rem; background:var(--bg-soft); border:1px solid var(--border); border-radius:6px;">
+        <div style="font-size:10px;color:var(--text-muted);">Equity multiplier</div>
+        <div style="font-size:1.1rem;font-weight:600;color:var(--amber-400);">2.74×</div>
+      </div>
+    </div>
+    <div style="margin-top:.8rem; font-family:sans-serif; font-size:12px; color:var(--text-muted);">Weak profitability is the primary driver of negative ROE; leverage amplifies losses rather than enhancing returns.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.8rem;">Key Credit Risk Factors</div>
+  <div class="risk-grid">
+    <div class="risk-item red">
+      <div class="risk-title">Persistent losses</div>
+      <div class="risk-desc">Net loss widened from ¥3.1bn (2020) to ¥7.5bn (2022). Adjusted losses also expanding.</div>
+    </div>
+    <div class="risk-item red">
+      <div class="risk-title">Cash flow pressure</div>
+      <div class="risk-desc">Current ratio fell from 3.02× to 1.43×. Short-term debt increased 437% in one year.</div>
+    </div>
+    <div class="risk-item amber">
+      <div class="risk-title">Monetisation uncertainty</div>
+      <div class="risk-desc">Gaming revenue declining; ad revenue cyclical; VAS growth not yet offsetting cost expansion.</div>
+    </div>
+    <div class="risk-item amber">
+      <div class="risk-title">Operating cost pressure</div>
+      <div class="risk-desc">Content + R&amp;D + marketing costs grew 16.6% in 2022. Cost discipline remains critical.</div>
+    </div>
+    <div class="risk-item blue">
+      <div class="risk-title">Regulatory exposure</div>
+      <div class="risk-desc">Content review, gaming approvals, data security, and platform governance compliance risks.</div>
+    </div>
+    <div class="risk-item blue">
+      <div class="risk-title">Competitive positioning</div>
+      <div class="risk-desc">Strong community moat (Z-gen users, bullet-comment culture) differentiates from short-video peers.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.6rem;">Valuation Summary</div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">DCF / FCFF Method</div>
+      <div class="prose" style="font-size:.88rem;">
+        <p>FY2022 operating cash flow: ¥4.0bn. Free cash flow estimated at ¥2.3bn (after capex). WACC applied at <strong>5.67%</strong> (β=1.09, risk-free rate=1.58%, MRP=5%).</p>
+        <p>YoY FCFF growth: +88.9%, driven by capex reduction and partial short-term investment redemption.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">P/E Comparable Analysis</div>
+      <div class="prose" style="font-size:.88rem;">
+        <p>Bilibili P/E: <strong>1.7×</strong> (as of 2022-09-30) vs. iQIYI at 450×. The low P/E reflects persistent losses — conventional earnings-based multiples are not applicable; EV/revenue or EV/user metrics would be more appropriate.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="card-label" style="margin-bottom:.5rem;">My Contribution</div>
+  <ul class="contrib-list">
+    <li>Decomposed three years of Bilibili financial statements; computed profitability, solvency, operating efficiency, and cash flow ratios.</li>
+    <li>Built financial forecast and valuation models in Excel; estimated WACC (5.67%) and computed EVA.</li>
+    <li>Applied DuPont analysis to identify margin compression as the primary driver of negative ROE.</li>
+    <li>Applied PEST and Porter's Five Forces to map macro and industry risk environment.</li>
+    <li>Produced a full company valuation report with data visualisation and presented findings to the class.</li>
+  </ul>
+</section>
+</div>
+</div>
+
+<!-- PROJECT 2 -->
+<div id="p2">
+<div class="container">
+<section>
+  <div class="section-num">Project 02</div>
+  <div class="project-header">
+    <div class="project-num-badge">2</div>
+    <div>
+      <div class="project-title">AHP-Entropy Weight Multi-Criteria Risk Evaluation Model</div>
+      <div class="project-subtitle">Mathematical Contest in Modelling (MCM) — S Award (International) · 2023 &nbsp;|&nbsp; Chongqing University Thesis on CSR / Tesla (AHP application) · 2024</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Across two projects, I applied AHP (Analytic Hierarchy Process) and entropy-weight methods to build multi-criteria evaluation frameworks. The MCM competition produced a published academic paper; the Business Ethics thesis extended the methodology to ESG assessment. Both demonstrate capabilities directly transferable to credit risk scoring and industry risk ranking.</p>
+  </div>
+
+  <blockquote>The logic of AHP mirrors credit ratings analysis: both decompose a complex, multi-dimensional judgement into weighted sub-criteria, validate consistency, and produce a comparable composite score.</blockquote>
+
+  <div class="method-box">
+    <div class="method-label">Model Framework — Five Steps</div>
+    <div class="method-steps">
+      <div class="method-step">① Indicator selection</div>
+      <div class="method-step">② Data standardisation</div>
+      <div class="method-step">③ Entropy weight (objective)</div>
+      <div class="method-step">④ AHP weight (subjective)</div>
+      <div class="method-step">⑤ Combinatorial weighting</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.8rem;">AHP Hierarchy — Light Pollution Evaluation Model (MCM Paper)</div>
+  <div class="ahp-tree">
+    <div class="ahp-row"><div class="ahp-node target" style="min-width:180px;">Light pollution evaluation</div></div>
+    <div class="ahp-connector">│</div>
+    <div class="ahp-row">
+      <div class="ahp-node criterion">Human health<div class="weight-badge">24.2%</div></div>
+      <div class="ahp-node criterion">Economic impact<div class="weight-badge">4.5%</div></div>
+      <div class="ahp-node criterion">Ecosystem<div class="weight-badge">7.5%</div></div>
+      <div class="ahp-node criterion">Social influence<div class="weight-badge">12.5%</div></div>
+      <div class="ahp-node criterion">DN value (light)<div class="weight-badge">51.4%</div></div>
+    </div>
+    <div class="ahp-connector">│</div>
+    <div class="ahp-row">
+      <div class="ahp-node sub">Death rate</div>
+      <div class="ahp-node sub">Life expectancy</div>
+      <div class="ahp-node sub">GDP</div>
+      <div class="ahp-node sub">Unemployment</div>
+      <div class="ahp-node sub">Forest coverage</div>
+      <div class="ahp-node sub">Prosecution rate</div>
+      <div class="ahp-node sub">DN value</div>
+    </div>
+  </div>
+
+  <div class="card-label" style="margin:.9rem 0 .6rem;">Entropy Weight Results — Information Value per Indicator</div>
+  <div class="card" style="padding:1rem 1.2rem;">
+    <div class="bar-row"><div class="bar-label">DN value (night light)</div><div class="bar-track"><div class="bar-fill" style="width:75%; background:var(--blue-600);"><span>18.74%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">GDP</div><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--blue-400);"><span>25.61%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">Forest coverage</div><div class="bar-track"><div class="bar-fill" style="width:71%; background:var(--teal-400);"><span>18.29%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">Death rate</div><div class="bar-track"><div class="bar-fill" style="width:53%; background:var(--teal-600);"><span>13.61%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">Prosecution rate</div><div class="bar-track"><div class="bar-fill" style="width:45%; background:var(--gray-400);"><span>11.63%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">Unemployment</div><div class="bar-track"><div class="bar-fill" style="width:38%; background:var(--gray-400);"><span>9.80%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">Life expectancy</div><div class="bar-track"><div class="bar-fill" style="width:9%; background:var(--gray-200);"><span style="color:var(--gray-800);">2.32%</span></div></div></div>
+    <div style="margin-top:.7rem; font-family:sans-serif; font-size:11.5px; color:var(--text-muted);">Entropy weight = objective weight derived from information variance across city samples.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.6rem;">Consistency Verification</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-value">5.087</div><div class="metric-label">λmax (target-criterion matrix)</div></div>
+    <div class="metric"><div class="metric-value">0.022</div><div class="metric-label">CI (consistency index)</div></div>
+    <div class="metric"><div class="metric-value">0.020</div><div class="metric-label">CR (consistency ratio)</div><div class="metric-note">&lt; 0.1 ✓ passes</div></div>
+    <div class="metric"><div class="metric-value">0.7 / 0.3</div><div class="metric-label">Entropy / AHP blend ratio</div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.6rem;">City-Level Evaluation Results</div>
+  <div class="data-table-wrap">
+    <table>
+      <thead><tr><th>City tier</th><th>Sample</th><th style="text-align:right;">DN value</th><th style="text-align:right;">Composite score</th></tr></thead>
+      <tbody>
+        <tr><td>First-tier</td><td>Shenzhen / Beijing / Guangzhou</td><td class="num highlight">19.93 / 9.08 / 8.77</td><td class="num">209,922.7 (avg)</td></tr>
+        <tr><td>New first-tier</td><td>Chengdu / Hangzhou / Wuhan</td><td class="num">6.27 / 6.56 / 7.12</td><td class="num">209,921.2 (avg)</td></tr>
+        <tr><td>Second-tier</td><td>Kunming / Changsha / Zhengzhou</td><td class="num">4.18 / 5.01 / 5.40</td><td class="num">209,920.8 (avg)</td></tr>
+        <tr><td>Third-tier</td><td>Yangzhou / Lanzhou / Luoyang</td><td class="num">3.62 / 2.98 / 2.37</td><td class="num">209,920.3 (avg)</td></tr>
+        <tr><td>Fourth-tier</td><td>Changde / Jinzhou / Danton</td><td class="num">2.77 / 1.85 / 1.08</td><td class="num">209,920.0 (avg)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="font-family:sans-serif;font-size:12px;color:var(--text-muted);margin-top:.4rem;">Finding: light pollution scores decrease monotonically from Tier 1 to Tier 4 cities, confirming the strong correlation with urban development level.</div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.5rem;">Transferability to Credit / Financial Risk Analysis</div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">This model</div>
+      <div style="font-family:sans-serif;font-size:13px;color:var(--text);">Multi-criteria risk score combining objective data (entropy weights) with expert judgement (AHP) → comparable city-level risk ranking</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Credit ratings analogy</div>
+      <div style="font-family:sans-serif;font-size:13px;color:var(--text);">Multi-factor risk assessment combining quantitative data (financials) with qualitative judgement (industry/management) → comparable issuer-level rating</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="card-label" style="margin-bottom:.5rem;">My Contribution</div>
+  <ul class="contrib-list">
+    <li>Led team in problem decomposition, indicator selection, and model architecture design within 72-hour competition window.</li>
+    <li>Computed entropy weights from DMSP/OLS satellite data; built AHP judgement matrices and conducted consistency checks (CR &lt; 0.1).</li>
+    <li>Combined objective and subjective weights (0.7/0.3 blend) to generate final composite evaluation scores.</li>
+    <li>Performed sensitivity analysis on intervention strategies; verified robustness of green lighting policy recommendations.</li>
+    <li>Wrote the 17-page English academic paper; the study was subsequently published in <em>Transactions on Environment, Energy and Earth Sciences</em> (GRET 2024, Vol. 3).</li>
+  </ul>
+</section>
+</div>
+</div>
+
+<!-- PROJECT 3 -->
+<div id="p3">
+<div class="container">
+<section>
+  <div class="section-num">Project 03</div>
+  <div class="project-header">
+    <div class="project-num-badge">3</div>
+    <div>
+      <div class="project-title">Macao's Diversification Pathways — AHP-Based Industry Evaluation</div>
+      <div class="project-subtitle">Regional Economics Course · Chongqing University · 2023–2024 · Team Leader &amp; Presenter</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>This project evaluated the role of the gaming industry as Macao's economic pillar and proposed a structured diversification strategy. Using AHP, we built a multi-dimensional evaluation framework to quantify the positive and negative impacts of gaming — across economic, social, cultural, and environmental dimensions — and reached a net-positive impact conclusion. The project maps closely to the analytical work required in ratings: understanding industry structure, policy environment, risk concentration, and economic sustainability.</p>
+  </div>
+
+  <div class="method-box">
+    <div class="method-label">Research Framework</div>
+    <div class="method-steps">
+      <div class="method-step">Industry overview</div>
+      <div class="method-step">Literature review</div>
+      <div class="method-step">Multi-dim impact analysis</div>
+      <div class="method-step">AHP evaluation</div>
+      <div class="method-step">Diversification strategy</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.8rem;">Key Findings — Gaming Industry Impact Assessment</div>
+
+  <div class="two-col">
+    <div>
+      <div style="font-family:sans-serif;font-size:12px;font-weight:600;color:var(--teal-600);margin-bottom:.5rem;">Positive contributions</div>
+      <div class="risk-item" style="background:var(--teal-50);border-color:var(--teal-400);margin-bottom:8px;">
+        <div class="risk-title">GDP concentration</div>
+        <div class="risk-desc">Gaming tax exceeds 80% of government revenue; industry once contributed ~60% of GDP.</div>
+      </div>
+      <div class="risk-item" style="background:var(--teal-50);border-color:var(--teal-400);margin-bottom:8px;">
+        <div class="risk-title">Employment multiplier</div>
+        <div class="risk-desc">Gaming + tourism together employ over 50% of the workforce; strong indirect effect on hospitality and retail.</div>
+      </div>
+      <div class="risk-item" style="background:var(--teal-50);border-color:var(--teal-400);">
+        <div class="risk-title">International positioning</div>
+        <div class="risk-desc">Gaming revenue surpassed Las Vegas in 2006; elevated global brand recognition drives tourist inflows.</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:sans-serif;font-size:12px;font-weight:600;color:var(--coral-600);margin-bottom:.5rem;">Risks &amp; constraints</div>
+      <div class="risk-item red" style="margin-bottom:8px;">
+        <div class="risk-title">Single-industry concentration risk</div>
+        <div class="risk-desc">Over-reliance on gaming creates severe vulnerability to regulatory changes, geopolitical events, and demand shocks (e.g. COVID-19 impact).</div>
+      </div>
+      <div class="risk-item red" style="margin-bottom:8px;">
+        <div class="risk-title">Social externalities</div>
+        <div class="risk-desc">Problem gambling, income inequality, and social cohesion pressures require active policy management.</div>
+      </div>
+      <div class="risk-item amber">
+        <div class="risk-title">Diversification bottleneck</div>
+        <div class="risk-desc">Human capital, land, and capital are heavily locked into gaming; switching costs for alternative industries are high.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.8rem;">AHP Evaluation Structure — Gaming Industry Assessment</div>
+  <div class="ahp-tree">
+    <div class="ahp-row"><div class="ahp-node target" style="min-width:200px;">Overall gaming industry impact</div></div>
+    <div class="ahp-connector">│</div>
+    <div class="ahp-row">
+      <div class="ahp-node criterion">Economic</div>
+      <div class="ahp-node criterion">Social</div>
+      <div class="ahp-node criterion">Cultural</div>
+      <div class="ahp-node criterion">Environmental</div>
+    </div>
+  </div>
+  <div style="font-family:sans-serif;font-size:12.5px;color:var(--text-muted);margin-top:.6rem;">Consistency checks (CR &lt; 0.1) passed for all sub-matrices. Composite score: net-positive impact, supporting retention and managed diversification rather than industry substitution.</div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.8rem;">Policy Recommendation — "Horizontal-Vertical" Diversification Strategy</div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">Vertical deepening</div>
+      <div style="font-family:sans-serif;font-size:13px;color:var(--text);line-height:1.6;">
+        Upgrade the gaming ecosystem into an integrated entertainment-hospitality-MICE complex. Develop luxury retail, conventions, performing arts, and high-end dining as complementary revenue streams that leverage existing visitor traffic.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Horizontal expansion</div>
+      <div style="font-family:sans-serif;font-size:13px;color:var(--text);line-height:1.6;">
+        Invest in high-tech industries, financial services, and education. Use gaming tax surplus to fund diversification. Align with Guangdong–Hong Kong–Macao Greater Bay Area development plan to attract international businesses.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="card-label" style="margin-bottom:.5rem;">My Contribution</div>
+  <ul class="contrib-list">
+    <li>Led team research; designed the analytical framework covering economic, social, cultural, and environmental impact dimensions.</li>
+    <li>Built and computed the AHP judgement matrices; conducted consistency verification for all sub-criteria.</li>
+    <li>Synthesised findings into a structured regional economic research report.</li>
+    <li>Delivered the English-language defence presentation; received an excellent grade assessment.</li>
+  </ul>
+</section>
+</div>
+</div>
+
+<!-- PROJECT 4 — PUBLICATION -->
+<div id="p4">
+<div class="container">
+<section>
+  <div class="section-num">Academic Publication</div>
+  <div class="project-header">
+    <div class="project-num-badge">★</div>
+    <div>
+      <div class="project-title">Peer-Reviewed Publication — First Author</div>
+      <div class="project-subtitle">Published 2024 · Warwick Evans Publishing · ISSN 2960-1924</div>
+    </div>
+  </div>
+
+  <div class="pub-card">
+    <div class="pub-icon">📄</div>
+    <div>
+      <div class="pub-journal">Transactions on Environment, Energy and Earth Sciences · GRET 2024 · Volume 3 · pp. 93–101</div>
+      <div class="pub-title">Comprehensive assessment and intervention strategies of urban light pollution in China based on AHP and entropy weight method</div>
+      <div class="pub-detail" style="margin-top:.5rem;">Yiying Chen · Chongqing University · DOI: Warwick Evans Publishing · CC BY-NC 4.0</div>
+      <div style="margin-top:.8rem; font-family:sans-serif; font-size:13px; color:var(--teal-800); line-height:1.6;">
+        <strong>Abstract:</strong> Developed a robust evaluation system using entropy weight method and AHP to quantify light pollution across Chinese cities. Incorporated DMSP/OLS satellite DN value data for objective measurement. Identified decreasing pollution trend from Tier 1 to Tier 4 cities; proposed targeted intervention strategies including green lighting, urban planning optimisation, and prevention facility construction.
+      </div>
+    </div>
+  </div>
+
+  <div class="card-label" style="margin:.9rem 0 .6rem;">Methodological Contribution</div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">Novel data integration</div>
+      <div style="font-family:sans-serif;font-size:13px;color:var(--text);line-height:1.6;">First to incorporate DMSP/OLS remote sensing DN value as a direct light pollution intensity indicator alongside traditional socioeconomic dimensions.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Combinatorial weighting</div>
+      <div style="font-family:sans-serif;font-size:13px;color:var(--text);line-height:1.6;">Combined objective entropy weights (0.7) with subjective AHP weights (0.3) to produce a balanced, validated composite score — improving on single-method approaches.</div>
+    </div>
+  </div>
+</section>
+</div>
+</div>
+
+<!-- SKILLS -->
+<div id="skills">
+<div class="container">
+<section>
+  <div class="section-num">Skills Summary</div>
+  <div class="section-title">Capabilities aligned with the role</div>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Financial analysis</div>
+      <div class="skill-desc">3-statement analysis, ratio computation, DuPont, DCF/WACC modelling, EVA, P/E comparables, financial forecasting.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🏗</div>
+      <div class="skill-name">Quantitative modelling</div>
+      <div class="skill-desc">AHP, entropy weight method, TOPSIS, sensitivity analysis, consistency verification. Excel financial models. Python / Stata / MATLAB.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔍</div>
+      <div class="skill-name">Industry research</div>
+      <div class="skill-desc">PEST, Porter's Five Forces, SWOT. Policy analysis, competitor benchmarking, data cleaning and dynamic monitoring.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⚠️</div>
+      <div class="skill-name">Risk assessment</div>
+      <div class="skill-desc">Identifying credit risk factors from financial data, business model analysis, industry structure, and macro/policy environment.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📝</div>
+      <div class="skill-name">Report writing</div>
+      <div class="skill-desc">Bilingual (Chinese/English) academic and professional writing. Structured analytical reports, peer-reviewed publications, and presentation slides.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">Languages</div>
+      <div class="skill-desc">Mandarin Chinese (native). English: IELTS 7.0, GRE 323 — full academic reading, writing, and presentation in English.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-label" style="margin-bottom:.8rem;">Additional Academic Output</div>
+  <div class="card">
+    <ul class="contrib-list">
+      <li><strong>Impact of the digital service economy on green economic efficiency in the Beijing-Tianjin-Hebei region</strong> — applied econometric modelling to resource allocation efficiency; first author.</li>
+      <li><strong>Impact of industrial robot adoption on economic growth</strong> — multi-country panel data analysis; parameter calibration and uncertainty analysis; first author.</li>
+      <li><strong>Determinants of flexible workers participating in urban employee pension insurance</strong> — Logit model using CHFS survey data; first author.</li>
+      <li><strong>Green consumption awareness among university students under dual-carbon goals</strong> — survey-based statistical analysis; first author.</li>
+    </ul>
+  </div>
+</section>
+</div>
+</div>
+
+
+<!-- PROJECT 5 — QUANTITATIVE METHODS -->
+<div id="p5">
+<div class="container">
+<section>
+  <div class="section-num">Project 04</div>
+  <div class="project-header">
+    <div class="project-num-badge">4</div>
+    <div>
+      <div class="project-title">Quantitative Modelling Suite — CEA, Decision Trees &amp; PCA</div>
+      <div class="project-subtitle">Advanced Economic Evaluation &amp; Modelling for Decision Science · UCL MSc · 2025–2026</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>A suite of quantitative analytical projects from the UCL MSc programme, spanning trial-based cost-effectiveness analysis, decision-analytic Markov modelling, machine learning dimensionality reduction, and capacity planning models. These methods are directly transferable to economic evaluation, financial modelling, and data-driven decision support in finance and consulting contexts.</p>
+  </div>
+
+  <div class="method-box">
+    <div class="method-label">Methods Covered</div>
+    <div class="method-steps">
+      <div class="method-step">Trial-based CEA</div>
+      <div class="method-step">Markov cohort model</div>
+      <div class="method-step">Monte Carlo PSA</div>
+      <div class="method-step">Decision tree</div>
+      <div class="method-step">One-way DSA / Tornado</div>
+      <div class="method-step">PCA + clustering</div>
+      <div class="method-step">M/M/s queueing</div>
+      <div class="method-step">Bootstrap CI</div>
+      <div class="method-step">Gamma GLM</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SUB: Trial-based CEA -->
+  <div style="margin-bottom:2rem;">
+    <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+      <div style="background:var(--teal-50);border:1px solid var(--teal-100);border-radius:6px;padding:.35rem .8rem;font-family:sans-serif;font-size:11px;font-weight:600;color:var(--teal-800);">4.1</div>
+      <div>
+        <div style="font-size:1.05rem;color:var(--gray-900);">Trial-based CEA — Atrial Fibrillation Treatment</div>
+        <div style="font-family:sans-serif;font-size:12px;color:var(--text-muted);">R · GLBH0046 Advanced Economic Evaluation, UCL</div>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-bottom:1rem;">
+      <p>Analysed patient-level RCT data to estimate healthcare costs, EQ-5D-3L utilities and QALYs for AF treatment vs standard of care. Applied bootstrapping and Gamma GLM for skewed cost distributions; interpreted ICER against a £30,000/QALY willingness-to-pay threshold.</p>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-value" style="color:var(--teal-600);">£13,231</div>
+        <div class="metric-label">ICER per QALY gained</div>
+        <div class="metric-note">Below £30k/QALY threshold</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value" style="color:var(--teal-600);">83.8%</div>
+        <div class="metric-label">Probability cost-effective</div>
+        <div class="metric-note">At £30,000/QALY WTP</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">+0.120</div>
+        <div class="metric-label">Incremental QALYs</div>
+        <div class="metric-note">AF vs standard of care</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">+£1,586</div>
+        <div class="metric-label">Incremental cost (AF arm)</div>
+        <div class="metric-note">95% CI £519–£2,653</div>
+      </div>
+    </div>
+
+    <div class="data-table-wrap">
+      <table>
+        <thead><tr><th>Analysis</th><th>Method</th><th>Key finding</th></tr></thead>
+        <tbody>
+          <tr><td>Cost analysis</td><td>Gamma GLM · Bootstrap CI · Welch t-test</td><td class="pos">AF arm +£1,586 (p=0.004)</td></tr>
+          <tr><td>QALY estimation</td><td>EQ-5D-3L + area-under-curve</td><td>+0.120 QALYs (95% CI −0.032 to 0.268)</td></tr>
+          <tr><td>Cost-effectiveness</td><td>ICER + INB at £30k/QALY</td><td class="pos">ICER £13,231 — cost-effective</td></tr>
+          <tr><td>One-way DSA</td><td>dampack tornado diagram</td><td>Drug cost &amp; treatment effect = primary ICER drivers</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:.8rem;">
+      <span class="tag tag-blue">R</span><span class="tag tag-blue">ggplot2</span><span class="tag tag-blue">boot</span><span class="tag tag-blue">dampack</span><span class="tag tag-teal">EQ-5D-3L</span><span class="tag tag-teal">Gamma GLM</span><span class="tag tag-teal">Bootstrap CI</span><span class="tag tag-teal">AUC-QALY</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SUB: Screening CEA + Decision Tree -->
+  <div style="margin-bottom:2rem;">
+    <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+      <div style="background:var(--amber-50);border:1px solid var(--amber-100);border-radius:6px;padding:.35rem .8rem;font-family:sans-serif;font-size:11px;font-weight:600;color:var(--amber-800);">4.2</div>
+      <div>
+        <div style="font-size:1.05rem;color:var(--gray-900);">Screening CEA &amp; Decision Tree — Breast Cancer Screening</div>
+        <div style="font-family:sans-serif;font-size:12px;color:var(--text-muted);">Excel · Decision-analytic framework · UCL Economic Evaluation coursework</div>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-bottom:1rem;">
+      <p>Evaluated cost-effectiveness of biennial breast cancer screening vs no screening using a decision tree framework in Excel. Conducted systematic one-way sensitivity analysis across diagnostic test parameters (sensitivity, specificity) and cancer prevalence assumptions to establish ICER robustness.</p>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-value" style="color:var(--amber-800);">£423</div>
+        <div class="metric-label">Base case ICER per QALY</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">£377–£507</div>
+        <div class="metric-label">ICER range (sensitivity)</div>
+        <div class="metric-note">Across test sensitivity params</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">£215–£469</div>
+        <div class="metric-label">ICER range (specificity)</div>
+        <div class="metric-note">Across test specificity params</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:.8rem;">
+      <div class="card-label">Analytical insight</div>
+      <div style="font-family:sans-serif;font-size:13px;color:var(--text);line-height:1.6;">ICER decreases from £469 to £377 as cancer prevalence increases from 0.0036 to 0.0044 — demonstrating that screening becomes more cost-effective in higher-risk populations. This type of threshold analysis directly informs pricing and market access decisions.</div>
+    </div>
+
+    <div style="margin-top:.8rem;">
+      <span class="tag tag-amber">Excel</span><span class="tag tag-amber">Decision tree</span><span class="tag tag-amber">One-way DSA</span><span class="tag tag-amber">ICER interpretation</span><span class="tag tag-amber">Diagnostic test parameters</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SUB: Markov -->
+  <div style="margin-bottom:2rem;">
+    <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+      <div style="background:var(--blue-50);border:1px solid var(--blue-100);border-radius:6px;padding:.35rem .8rem;font-family:sans-serif;font-size:11px;font-weight:600;color:var(--blue-800);">4.3</div>
+      <div>
+        <div style="font-size:1.05rem;color:var(--gray-900);">4-State Cohort Markov Model — EVAR vs Open Repair (IPF)</div>
+        <div style="font-family:sans-serif;font-size:12px;color:var(--text-muted);">R · 39-year horizon · Full PSA + DSA · UCL Advanced Economic Evaluation</div>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-bottom:1rem;">
+      <p>Built a 4-state cohort Markov model from scratch in R to compare two surgical interventions over a 39-year horizon with 3.5% discounting. Implemented full probabilistic sensitivity analysis via Monte Carlo simulation and one-way DSA using the dampack package. The structured approach — defining transition matrices, applying relative treatment effects, discounting, and quantifying uncertainty — mirrors the financial modelling logic used in DCF and scenario analysis.</p>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0;font-family:sans-serif;font-size:13px;">
+      <div style="background:var(--teal-50);border:1px solid var(--teal-100);border-radius:6px;padding:6px 14px;color:var(--teal-800);font-weight:500;">Mild IPF</div>
+      <div style="color:var(--text-muted);">→</div>
+      <div style="background:var(--amber-50);border:1px solid var(--amber-100);border-radius:6px;padding:6px 14px;color:var(--amber-800);font-weight:500;">Moderate IPF</div>
+      <div style="color:var(--text-muted);">→</div>
+      <div style="background:#FCEBEB;border:1px solid #F7C1C1;border-radius:6px;padding:6px 14px;color:#A32D2D;font-weight:500;">Severe IPF</div>
+      <div style="color:var(--text-muted);">→</div>
+      <div style="background:var(--gray-50);border:1px solid var(--gray-100);border-radius:6px;padding:6px 14px;color:var(--gray-600);font-weight:500;">Death (absorbing)</div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-value" style="color:var(--blue-800);">+121</div>
+        <div class="metric-label">Incremental QALYs</div>
+        <div class="metric-note">EVAR vs OR (cohort 1,000)</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value" style="color:var(--blue-800);">£19,374</div>
+        <div class="metric-label">ICER per QALY gained</div>
+        <div class="metric-note">Below £30k/QALY threshold</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">£1.29m</div>
+        <div class="metric-label">Incremental net benefit</div>
+        <div class="metric-note">At £30k/QALY WTP</div>
+      </div>
+    </div>
+
+    <div class="data-table-wrap" style="margin-top:1rem;">
+      <table>
+        <thead><tr><th>Component</th><th>Implementation</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>Model structure</td><td>4×4 transition matrix · 2 treatments · 39 cycles</td><td>Cohort trace: L/M/S/D distribution over time</td></tr>
+          <tr><td>Treatment effect</td><td>Relative reduction to progression probabilities</td><td>EVAR slows L→M and M→S transitions</td></tr>
+          <tr><td>Discounting</td><td>3.5% annual on costs and effects</td><td>Present value of 39-year horizon</td></tr>
+          <tr><td>One-way DSA</td><td>dampack + tornado diagram</td><td>Drug cost &amp; treatment effect = primary ICER drivers</td></tr>
+          <tr><td>Monte Carlo PSA</td><td>rbeta · rgamma · rlnorm distributions</td><td>CE plane + CEAC generated</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:.8rem;">
+      <span class="tag tag-blue">R</span><span class="tag tag-blue">Matrix algebra</span><span class="tag tag-blue">dampack</span><span class="tag tag-blue">Monte Carlo PSA</span><span class="tag tag-blue">Tornado diagram</span><span class="tag tag-blue">CEAC</span><span class="tag tag-blue">CE plane</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SUB: PCA + Decision Tree ML -->
+  <div>
+    <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+      <div style="background:#EEEDFE;border:1px solid #CECBF6;border-radius:6px;padding:.35rem .8rem;font-family:sans-serif;font-size:11px;font-weight:600;color:#3C3489;">4.4</div>
+      <div>
+        <div style="font-size:1.05rem;color:var(--gray-900);">Data Science Toolkit — PCA, Decision Trees &amp; Queueing Models</div>
+        <div style="font-family:sans-serif;font-size:12px;color:var(--text-muted);">Python · scikit-learn · scipy · GLBH0031 Modelling for Decision Science, UCL</div>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-bottom:1rem;">
+      <p>Developed a modular Python analytical toolkit covering four quantitative domains. The PCA and decision tree modules have direct analogues in financial data analysis — dimensionality reduction for large datasets, interpretable classification models, and queuing theory for operational capacity planning.</p>
+    </div>
+
+    <div class="risk-grid">
+      <div class="risk-item blue">
+        <div class="risk-title">PCA + clustering</div>
+        <div class="risk-desc">Dimensionality reduction on high-dimensional gene-expression data. Projected samples into principal component space; visualised cumulative variance explained. Directly applicable to factor analysis in financial datasets.</div>
+      </div>
+      <div class="risk-item blue">
+        <div class="risk-title">Decision tree classifier</div>
+        <div class="risk-desc">Interpretable supervised prediction model. Generated tree visualisation, confusion matrix and MSE. Logic mirrors credit scoring decision trees used in risk classification.</div>
+      </div>
+      <div class="risk-item" style="background:var(--teal-50);border-color:var(--teal-400);">
+        <div class="risk-title" style="color:var(--gray-900);">SIR epidemic model</div>
+        <div class="risk-desc" style="color:var(--text-muted);">Compartmental ODE model via scipy.odeint to simulate S/I/R trajectories, infection peak timing and reproduction number dynamics.</div>
+      </div>
+      <div class="risk-item" style="background:var(--teal-50);border-color:var(--teal-400);">
+        <div class="risk-title" style="color:var(--gray-900);">M/M/s queueing model</div>
+        <div class="risk-desc" style="color:var(--text-muted);">Hospital capacity planning: given arrival rate, service rate, and server count → utilisation, expected queue length, average waiting time. Applicable to operational efficiency analysis.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:.8rem;">
+      <span class="tag tag-blue">Python</span><span class="tag tag-blue">scikit-learn</span><span class="tag tag-blue">PCA</span><span class="tag tag-blue">K-means</span><span class="tag tag-blue">Decision tree</span><span class="tag tag-teal">scipy.odeint</span><span class="tag tag-teal">M/M/s queueing</span><span class="tag tag-teal">pandas · numpy · matplotlib</span>
+    </div>
+  </div>
+
+</section>
+</div>
+</div>
+
+
+<footer>
+  <div>Yiying Chen &nbsp;·&nbsp; xiaoman6302@gmail.com &nbsp;·&nbsp; +86 139 3463 1842</div>
+  <div style="margin-top:.5rem; color:var(--gray-400);">Economics, Finance &amp; Data Analysis Portfolio &nbsp;·&nbsp; Analytical Internship Applications 2026</div>
+</footer>
+
+</body>
+</html>
